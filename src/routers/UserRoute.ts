@@ -14,9 +14,25 @@ export class UserRoute extends Route{
     }
 
     protected setRoutes(): void {
-        this.router.get(`${this.url}test`,(req, res)=>{
-            this.Contorller.test(req, res);
+        
+        this.router.get(`${this.url}findAll`,(req, res)=>{
+            this.Contorller.findAll(req, res);
+        })
+
+        /**
+         * 新增學生
+         * request body {
+         *  userName: string,
+         *  name: string",
+         *  department: string,
+         *  grade: string,
+         *  class: string,
+         *  Email: string
+         * } 
+         * @returns resp<Student>
+         */
+        this.router.post(`${this.url}insertOne`,(req, res)=>{
+            this.Contorller.insertOne(req, res);
         })
     }
-
 }

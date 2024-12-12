@@ -1,7 +1,7 @@
 export interface Student{
-    _id: string,
+    _id?: string,
     userName: string,
-    sid: String,
+    sid?: String,
     name: string,
     department: string,
     grade: string,
