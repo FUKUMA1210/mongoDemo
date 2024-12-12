@@ -8,7 +8,7 @@ export const studentsSchemas = new Schema<Student>({
     department:{ type: String, required: true },
     grade:{ type: String, required: true },
     class:{ type: String, required: true },
-    Email:{ type: String, required: true },
+    email:{ type: String, required: true },
     absences:{ type: Number, required: false },
 });
 
