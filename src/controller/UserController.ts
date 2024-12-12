@@ -1,7 +1,9 @@
 import { Contorller } from "../abstract/Contorller";
 import { Request, response, Response } from "express";
-import { studentsDbResp, UserService } from "../Service/UserService";
+import { UserService } from "../Service/UserService";
 import { resp } from "../utils/resp";
+import { DBResp } from "../interfaces/DBResp";
+import { Student } from "../interfaces/Student";
 require('dotenv').config()
 
 export class UserController extends Contorller {
@@ -12,9 +14,9 @@ export class UserController extends Contorller {
         this.service = new UserService();
     }
 
-    public async test(Request: Request, Response: Response) {
+    public async findAll(Request: Request, Response: Response) {
 
-        const res:resp<studentsDbResp|undefined> ={
+        const res: resp<Array<DBResp<Student>> | undefined> = {
             code: 200,
             message: "",
             body: undefined
@@ -25,11 +27,18 @@ export class UserController extends Contorller {
             res.body = dbResp;
             res.message = "find sucess";
             Response.send(res);
-        }else{
+        } else {
             res.code = 500;
             res.message = "server error";
             Response.status(500).send(res);
         }
-        
+
     }
+
+    public async insertOne(Request: Request, Response: Response) {
+        const resp = await this.service.insertOne(Request.body)
+        Response.status(resp.code).send(resp)
+    }
+
+
 }
